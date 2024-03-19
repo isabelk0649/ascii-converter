@@ -3,16 +3,16 @@
 _start:
     ldr    r2, =Data        // Store address of start of data
     ldr    r3, =_Data       // Store address of end of data 
-	ldr    r5, =AscIITable  // Store address of start of ASCII table
-	ldr    r4, =0x1000       // Store address of output array
+    ldr    r5, =AscIITable  // Store address of start of ASCII table
+    ldr    r4, =0x1000       // Store address of output array
 
 Loop:
     ldr    r0, [r2], #4     // Read word from address with post-increment (r0 = *r2, r2 += 4)
-	// Converts hexadecimal to ASCII using lookup table
+    // Converts hexadecimal to ASCII using lookup table
     ldrb   r1, [r5, r0]     // Load ASCII value from lookup table
     strb   r1, [r4], #1     // Store ASCII character in output array and increment address
 
-	cmp    r3, r2           // Compare current address with end of list
+    cmp    r3, r2           // Compare current address with end of list
     beq    _stop          // If at end, exit loop
 	
     b      Loop             // Continue
